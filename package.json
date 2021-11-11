@@ -19,7 +19,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "6.0.12",
     "morgan": "~1.9.1",
-    "node-sass-middleware": "0.11.0"
+    "node-sass-middleware": "0.11.0",
+    "ytdl-core": "4.9.1"
   },
   "devDependencies": {
     "jest": "27.3.1",

@@ -1,5 +1,6 @@
 require('app-module-path').addPath('.');
 const createError = require('http-errors');
+const cors = require('cors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
@@ -10,7 +11,7 @@ const routes = require('routes');
 const connectDB = require('config/db');
 
 const app = express();
-
+app.use(cors());
 connectDB();
 
 // view engine setup

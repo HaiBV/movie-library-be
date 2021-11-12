@@ -1,6 +1,8 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const { isEmail } = require('utils/validator');
+
 function AuthController(User) {
   const index = async (req, res, next) => {
     try {
@@ -21,9 +23,13 @@ function AuthController(User) {
         const isMatch = await bcrypt.compare(password, user.password);
 
         if (!isMatch) {
-          return res.status(400).json({ errors: [{ msg: 'Invalid Credentials' }] });
+          return res.status(400).json({ errors: [{ msg: 'Password không chính xác!' }] });
         }
       } else {
+        if (!isEmail(email) || password === '') {
+          return res.status(400).json({ errors: [{ msg: 'Email, password không đúng định dạng' }] });
+        }
+
         user = new User({
           email,
           password,

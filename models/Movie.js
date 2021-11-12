@@ -10,6 +10,10 @@ const MovieSchema = new Schema({
     type: String,
     required: true,
   },
+  movie_id: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
   },

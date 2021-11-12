@@ -26,12 +26,14 @@ function MovieController(User, Movie) {
 
       const metaData = await ytdl.getInfo(url);
       const { title, description } = metaData.videoDetails;
+      const movieId = ytdl.getURLVideoID(url);
 
       const newMovie = new Movie({
         url: req.body.url,
         user_email: user.email,
         title,
         description,
+        movie_id: movieId,
       });
 
       const movie = await newMovie.save();

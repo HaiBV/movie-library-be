@@ -4,7 +4,7 @@ function MovieController(User, Movie) {
   const getMovies = async (req, res) => {
     try {
       const movies = await Movie.find();
-      return res.json({ movies });
+      return res.json(movies);
     } catch (err) {
       console.error(err.message);
       return res.status(500).send('Server Error');
@@ -15,13 +15,13 @@ function MovieController(User, Movie) {
     try {
       const user = await User.findById(req.user.id).select('-password');
       if (!user) {
-        return res.status(200).send({ error: true, message: 'User not found!' });
+        return res.status(400).send({ error: true, message: 'User not found!' });
       }
 
       const { url } = req.body;
 
       if (!ytdl.validateURL(url)) {
-        return res.status(200).send({ error: true, message: 'Youtube URL not validate!' });
+        return res.status(400).send({ error: true, message: 'Youtube URL not validate!' });
       }
 
       const metaData = await ytdl.getInfo(url);
